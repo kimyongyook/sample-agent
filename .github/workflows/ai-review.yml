@@ -26,7 +26,7 @@ jobs:
         run: echo "GEMINI_API_KEY is not configured; skipping AI review."
       - name: Review pull request
         if: env.GEMINI_API_KEY != ''
-        uses: kimyongyook/code-review-agent@ddd0863f93429bbef23b25da2d4fd11914d5f7b3
+        uses: kimyongyook/code-review-agent@7d9559caf4f1eca4b7f7077a308dd9ae7c17741c
         with:
           github-token: ${{ github.token }}
           gemini-api-key: ${{ env.GEMINI_API_KEY }}
