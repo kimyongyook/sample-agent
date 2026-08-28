@@ -8,8 +8,9 @@ version = "0.1.0"
 description = "Minimal project used to demonstrate automated code review"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "PyJWT==2.3.0",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-
