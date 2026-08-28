@@ -18,9 +18,15 @@ jobs:
       github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
     steps:
+      - name: Report missing Gemini secret
+        if: env.GEMINI_API_KEY == ''
+        run: echo "GEMINI_API_KEY is not configured; skipping AI review."
       - name: Review pull request
-        uses: kimyongyook/code-review-agent@7da556ea49d235d71f7613d41bcea6ff055b6ec8
+        if: env.GEMINI_API_KEY != ''
+        uses: kimyongyook/code-review-agent@ddd0863f93429bbef23b25da2d4fd11914d5f7b3
         with:
           github-token: ${{ github.token }}
-          simflow-api-key: ${{ secrets.SIMFLOW_API_KEY }}
+          gemini-api-key: ${{ env.GEMINI_API_KEY }}
