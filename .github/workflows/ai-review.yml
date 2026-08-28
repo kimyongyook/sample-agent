@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Review pull request
-        uses: kimyongyook/code-review-agent@e6e1ccbdaf6a331039fcb022e80f2b8c04ee6e90
+        uses: kimyongyook/code-review-agent@7da556ea49d235d71f7613d41bcea6ff055b6ec8
         with:
           github-token: ${{ github.token }}
           simflow-api-key: ${{ secrets.SIMFLOW_API_KEY }}
