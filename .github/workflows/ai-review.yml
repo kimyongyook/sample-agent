@@ -1,0 +1,26 @@
+name: AI Code Review
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, ready_for_review]
+
+permissions:
+  pull-requests: write
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Review pull request
+        uses: kimyongyook/code-review-agent@e6e1ccbdaf6a331039fcb022e80f2b8c04ee6e90
+        with:
+          github-token: ${{ github.token }}
+          simflow-api-key: ${{ secrets.SIMFLOW_API_KEY }}
